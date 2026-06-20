@@ -10,7 +10,12 @@ from backend.pca_utils import load_pca_model, transform_vector
 from backend.similarity import compare_faces
 from backend.analysis import analyze_similarity
 
-
+try:
+    pca_model = load_pca_model()
+except Exception as e:
+    st.exception(e)
+    st.stop()
+    
 # ==========================
 # Konfigurasi Halaman
 # ==========================
@@ -37,9 +42,7 @@ menggunakan PCA, Cosine Similarity, dan Euclidean Distance.
 try:
     pca_model = load_pca_model()
 except Exception as e:
-    st.error(
-        "Model PCA belum tersedia. Jalankan train_model.py terlebih dahulu."
-    )
+    st.error(f"Gagal memuat model PCA:\n\n{str(e)}")
     st.stop()
 
 detector = FaceDetection()

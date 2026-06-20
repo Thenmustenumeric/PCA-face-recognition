@@ -10,11 +10,15 @@ import pickle
 import numpy as np
 
 # Lokasi penyimpanan model
-MODEL_DIR = "models"
+from pathlib import Path
 
-PCA_MODEL_PATH = os.path.join(MODEL_DIR, "pca_model.pkl")
-LABELS_PATH = os.path.join(MODEL_DIR, "labels.pkl")
-X_PCA_PATH = os.path.join(MODEL_DIR, "x_pca.npy")
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+MODEL_DIR = BASE_DIR / "models"
+
+PCA_MODEL_PATH = MODEL_DIR / "pca_model.pkl"
+LABELS_PATH = MODEL_DIR / "labels.pkl"
+X_PCA_PATH = MODEL_DIR / "x_pca.npy"
 
 
 def load_pca_model():
