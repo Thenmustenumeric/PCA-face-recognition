@@ -1,12 +1,3 @@
-"""
-similarity.py
-
-Modul untuk menghitung kemiripan antara dua vektor PCA.
-Menggunakan:
-1. Cosine Similarity
-2. Euclidean Distance
-"""
-
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 

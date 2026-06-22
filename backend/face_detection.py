@@ -1,10 +1,3 @@
-"""
-face_detection.py
-
-Modul untuk mendeteksi dan memotong (crop) area wajah
-menggunakan Haar Cascade OpenCV.
-"""
-
 import cv2
 import numpy as np
 

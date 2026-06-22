@@ -1,10 +1,3 @@
-"""
-train_model.py
-
-Melatih model PCA menggunakan dataset wajah dan
-menyimpan model yang telah dilatih.
-"""
-
 import os
 import pickle
 import numpy as np

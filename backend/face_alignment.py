@@ -1,15 +1,7 @@
-"""
-face_alignment.py
-
-Modul untuk menyelaraskan (align) wajah sebelum preprocessing.
-Versi awal ini melakukan normalisasi ukuran dan orientasi dasar.
-Dapat ditingkatkan di masa depan menggunakan facial landmarks.
-"""
-
 import cv2
 import numpy as np
 
-# Ukuran standar wajah setelah alignment
+# ukuran standar wajah setelah alignment
 ALIGN_SIZE = (100, 100)
 
 

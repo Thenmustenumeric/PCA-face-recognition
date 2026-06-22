@@ -1,16 +1,3 @@
-"""
-preprocess.py
-
-Modul untuk melakukan preprocessing gambar wajah sebelum diproses
-menggunakan PCA.
-
-Tahapan:
-1. Konversi ke grayscale
-2. Resize ke ukuran tetap
-3. Normalisasi piksel (0 - 1)
-4. Flatten menjadi vektor 1 dimensi
-"""
-
 import cv2
 import numpy as np
 

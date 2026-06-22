@@ -1,11 +1,3 @@
-"""
-analysis.py
-
-Modul untuk menganalisis hasil kemiripan wajah
-berdasarkan Cosine Similarity dan Euclidean Distance.
-"""
-
-
 def analyze_similarity(cosine_score, euclidean_distance):
     """
     Menganalisis tingkat kemiripan wajah.

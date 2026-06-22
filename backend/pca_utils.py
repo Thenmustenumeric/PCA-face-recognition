@@ -1,10 +1,3 @@
-"""
-pca_utils.py
-
-Utilitas untuk memuat model PCA dan melakukan transformasi
-vektor wajah ke ruang PCA.
-"""
-
 from pathlib import Path
 import pickle
 import numpy as np
