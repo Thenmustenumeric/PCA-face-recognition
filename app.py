@@ -14,13 +14,92 @@ from backend.analysis import analyze_similarity
 # KONFIGURASI HALAMAN
 # ==================================
 
+st.markdown("""
+<style>
+.main {
+    background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+}
+
+h1 {
+    text-align: center;
+    color: #FFD54F;
+    font-size: 50px !important;
+    text-shadow: 3px 3px #000;
+}
+
+.block-container {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+.pixel-card {
+    background-color: #111827;
+    border: 3px solid #3B82F6;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 6px 6px 0px #000;
+}
+
+.upload-box {
+    border: 3px dashed #22C55E;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #1E293B;
+}
+
+.stButton>button {
+    width: 100%;
+    height: 60px;
+    background-color: #FACC15;
+    color: black;
+    font-size: 22px;
+    font-weight: bold;
+    border-radius: 8px;
+    border: 3px solid black;
+}
+
+.stButton>button:hover {
+    background-color: #F59E0B;
+}
+
+.metric-card {
+    background-color: #111827;
+    border-radius: 12px;
+    padding: 15px;
+    border: 2px solid #60A5FA;
+}
+</style>
+""", unsafe_allow_html=True)
+
 st.set_page_config(
     page_title="Deteksi Kemiripan Wajah PCA",
     page_icon="🧑",
     layout="wide"
 )
 
-st.title("🧑 Deteksi Kemiripan Wajah Menggunakan PCA")
+st.markdown("""
+<h1>🎮 DETEKSI KEMIRIPAN WAJAH</h1>
+<h3 style='text-align:center;color:white;'>
+Foto Masa Kecil vs Foto Masa Dewasa
+</h3>
+
+<p style='text-align:center;color:#cbd5e1;font-size:20px'>
+Menggunakan PCA, Cosine Similarity, dan Euclidean Distance
+</p>
+""", unsafe_allow_html=True)
+
+st.sidebar.title("📖 Informasi")
+
+st.sidebar.success("""
+Metode yang digunakan:
+
+- PCA
+- Cosine Similarity
+- Euclidean Distance
+
+Upload dua foto untuk mengetahui tingkat kemiripan wajah.
+""")
 
 st.write("""
 Upload foto masa kecil dan foto masa dewasa,
@@ -57,23 +136,29 @@ col1, col2 = st.columns(2)
 
 with col1:
 
+    st.markdown("## 👶 Foto Masa Kecil")
+
     child_file = st.file_uploader(
-        "Upload Foto Masa Kecil",
-        type=["jpg", "jpeg", "png"]
+        "",
+        type=["jpg","jpeg","png"],
+        key="child"
     )
 
 with col2:
 
+    st.markdown("## 🧑 Foto Masa Dewasa")
+
     adult_file = st.file_uploader(
-        "Upload Foto Masa Dewasa",
-        type=["jpg", "jpeg", "png"]
+        "",
+        type=["jpg","jpeg","png"],
+        key="adult"
     )
 
 # ==================================
 # PROSES
 # ==================================
 
-if st.button("Bandingkan Wajah"):
+if st.button("🎮 BANDINGKAN WAJAH"):
 
     if child_file is None or adult_file is None:
 
@@ -197,23 +282,21 @@ if st.button("Bandingkan Wajah"):
 
         st.divider()
 
-        st.subheader("📷 Preview Gambar")
+        st.markdown("## 🖼️ Preview Foto yang Diunggah")
 
         c1, c2 = st.columns(2)
 
         with c1:
-
             st.image(
                 child_image,
-                caption="Foto Masa Kecil",
+                caption="👶 Foto Masa Kecil",
                 use_container_width=True
             )
 
         with c2:
-
             st.image(
                 adult_image,
-                caption="Foto Masa Dewasa",
+                caption="🧑 Foto Masa Dewasa",
                 use_container_width=True
             )
 
@@ -255,7 +338,7 @@ if st.button("Bandingkan Wajah"):
 
         st.divider()
 
-        st.subheader("📊 Hasil Analisis")
+        st.subheader("🏆 Hasil Analisis")
 
         persen = analysis["similarity_percent"]
 
@@ -264,28 +347,29 @@ if st.button("Bandingkan Wajah"):
             min(1.0, persen / 100)
         )
 
-        st.metric(
-            "🎯 Tingkat Kemiripan Wajah",
-            f"{persen:.2f}%"
-        )
+        # Tampilkan 3 metrik dalam satu baris
+        k1, k2, k3 = st.columns(3)
 
-        st.progress(progress_value)
-
-        col_a, col_b = st.columns(2)
-
-        with col_a:
-
+        with k1:
             st.metric(
-                "Cosine Similarity",
+                "🎯 Kemiripan",
+                f"{persen:.2f}%"
+            )
+
+        with k2:
+            st.metric(
+                "📐 Cosine Similarity",
                 f"{analysis['cosine_similarity']:.4f}"
             )
 
-        with col_b:
-
+        with k3:
             st.metric(
-                "Euclidean Distance",
+                "📏 Euclidean Distance",
                 f"{analysis['euclidean_distance']:.4f}"
             )
+
+        # Progress bar
+        st.progress(progress_value)
 
         # ==================================
         # KATEGORI
